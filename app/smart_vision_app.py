@@ -58,7 +58,7 @@ def load_model():
     return model
 
 #model = None  # 
-#model = load_model(model_path)
+model = load_model(model_path)
 class_labels = ['No DR', 'Mild', 'Moderate', 'Severe', 'Proliferative DR']
 
 def predict_diabetic_retinopathy(processed):
