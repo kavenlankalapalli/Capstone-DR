@@ -40,8 +40,9 @@ if "processed_image" not in st.session_state:
 # -------------------------------
 # Model Loading
 # -------------------------------
-@st.cache_resource
 model_path = "models/dr_model.keras"
+@st.cache_resource
+
 def load_model():
     
     #model_path = '/Users/kalyanlankalapalli/documents/gcu/milestone-3/dr_model.keras'
