@@ -10,7 +10,7 @@ from session_manager import update_patient_info
 from session_manager import display_patient_summary
 from session_manager import clear_patient_session
 from report import generate_report
-#import gdown
+import gdown
 from tensorflow.keras.models import load_model
 
 
