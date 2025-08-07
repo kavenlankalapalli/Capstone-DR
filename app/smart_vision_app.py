@@ -10,6 +10,8 @@ from session_manager import update_patient_info
 from session_manager import display_patient_summary
 from session_manager import clear_patient_session
 from report import generate_report
+import gdown
+from tensorflow.keras.models import load_model
 
 
 initialize_session()
@@ -39,14 +41,23 @@ if "processed_image" not in st.session_state:
 # Model Loading
 # -------------------------------
 @st.cache_resource
+model_path = "models/dr_model.keras"
 def load_model():
-    model_path = '/Users/kalyanlankalapalli/documents/gcu/milestone-3/dr_model.keras'
-    # model = tf.keras.models.load_model(model_path)
-    model = None  # Placeholder
+    
+    #model_path = '/Users/kalyanlankalapalli/documents/gcu/milestone-3/dr_model.keras'
+    file_id = "14b1NASH8S7JGaMc4z5gmo-7CXrkKqk5l"
+    # Ensure the models directory exists
+    os.makedirs("models", exist_ok=True)
+    # Download the model only if it doesn't already exist
+    if not os.path.exists(model_path):
+        url = f"https://drive.google.com/uc?id={file_id}"
+        gdown.download(url, model_path, quiet=False)
+        model = tf.keras.models.load_model(model_path)
+    #model = None  # Placeholder
     return model
 
 #model = None  # 
-model = load_model()
+model = load_model(model_path)
 class_labels = ['No DR', 'Mild', 'Moderate', 'Severe', 'Proliferative DR']
 
 def predict_diabetic_retinopathy(processed):
