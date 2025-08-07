@@ -11,7 +11,8 @@ from session_manager import display_patient_summary
 from session_manager import clear_patient_session
 from report import generate_report
 #import gdown
-from tensorflow.keras.models import load_model
+#from tensorflow.keras.models import load_model
+from keras.models import load_model
 
 
 initialize_session()
