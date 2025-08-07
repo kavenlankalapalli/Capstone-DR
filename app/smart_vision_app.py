@@ -5,6 +5,7 @@ import time
 import io
 import cv2
 import os
+import tensorflow as tf
 from session_manager import initialize_session
 from session_manager import update_patient_info
 from session_manager import display_patient_summary
