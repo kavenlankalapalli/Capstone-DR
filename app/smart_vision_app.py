@@ -11,8 +11,8 @@ from session_manager import display_patient_summary
 from session_manager import clear_patient_session
 from report import generate_report
 #import gdown
-#from tensorflow.keras.models import load_model
-from keras.models import load_model
+from tensorflow.keras.models import load_model
+#from keras.models import load_model
 
 
 initialize_session()
@@ -45,7 +45,7 @@ if "processed_image" not in st.session_state:
 model_path = os.path.join("..", "model", "dr_model-4.keras")
 @st.cache_resource
 
-def load_model():
+def load_model(model_path):
     
     #model_path = '/Users/kalyanlankalapalli/documents/gcu/milestone-3/dr_model.keras'
     file_id = "14b1NASH8S7JGaMc4z5gmo-7CXrkKqk5l"
