@@ -10,7 +10,7 @@ from session_manager import update_patient_info
 from session_manager import display_patient_summary
 from session_manager import clear_patient_session
 from report import generate_report
-import gdown
+#import gdown
 from tensorflow.keras.models import load_model
 
 
@@ -40,7 +40,8 @@ if "processed_image" not in st.session_state:
 # -------------------------------
 # Model Loading
 # -------------------------------
-model_path = "models/dr_model.keras"
+#model_path = "models/dr_model.keras"
+model_path = os.path.join("..", "model", "dr_model-4.keras")
 @st.cache_resource
 
 def load_model():
@@ -50,10 +51,10 @@ def load_model():
     # Ensure the models directory exists
     os.makedirs("models", exist_ok=True)
     # Download the model only if it doesn't already exist
-    if not os.path.exists(model_path):
-        url = f"https://drive.google.com/uc?id={file_id}"
-        gdown.download(url, model_path, quiet=False)
-        model = tf.keras.models.load_model(model_path)
+    #if not os.path.exists(model_path):
+        #url = f"https://drive.google.com/uc?id={file_id}"
+        #gdown.download(url, model_path, quiet=False)
+    model = tf.keras.models.load_model(model_path)
     #model = None  # Placeholder
     return model
 
