@@ -1,7 +1,8 @@
 streamlit
+gdown
 Pillow
 numpy
 opencv-python-headless
 tensorflow
 matplotlib
-gdown
+
