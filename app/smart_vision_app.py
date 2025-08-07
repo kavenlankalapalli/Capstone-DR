@@ -42,7 +42,7 @@ if "processed_image" not in st.session_state:
 # -------------------------------
 # Model Loading
 # -------------------------------
-model_path = "dr_model.keras"
+model_path = "dr_model-4.keras"
 #model_path = os.path.join("..", "model", "dr_model-4.keras")
 # Optional: check the file if it exists
 if os.path.exists(model_path):
