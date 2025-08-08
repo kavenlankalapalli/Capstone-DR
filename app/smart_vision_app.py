@@ -43,7 +43,15 @@ if "processed_image" not in st.session_state:
 # -------------------------------
 # Model Loading
 # -------------------------------
+model_path = os.path.join(os.path.dirname(__file__), "dr_model-4.keras")
+st.write("Checking model path:", model_path)
 
+if os.path.exists(model_path):
+    from keras.models import load_model
+    #model = load_model(model_path)
+    st.success("Model loaded!")
+else:
+    st.warning("Model not found. Skipping load.")
 
 @st.cache_resource
 
