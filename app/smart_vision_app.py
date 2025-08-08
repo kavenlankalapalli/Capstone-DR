@@ -402,6 +402,8 @@ elif app_mode == "Patient Details":
                 st.info("No Right image uploaded.")
         
         #update_patient_info(first_name, last_name, gender, age, uploaded_patient_img_left, uploaded_patient_img_right)
+elif app_mode == "Help":
+    render_help()
 # -------------------------------
 # Footer
 # -------------------------------
