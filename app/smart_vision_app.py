@@ -246,42 +246,48 @@ elif app_mode == "Upload Image":
 # -------------------------------
 elif app_mode == "Preprocessing":
     st.header("Preprocessing Options")
-    if st.session_state.uploaded_patient_img_left:
+    left_exists = st.session_state.get("uploaded_patient_img_left")
+    right_exists = st.session_state.get("uploaded_patient_img_right")
+    if not left_exists and not right_exists:
+        st.error("❌ Please upload at least one retinal image (left or right) before proceeding with preprocessing.")
+    else:
         grayscale = st.checkbox("Convert to Grayscale")
         resize = st.checkbox("Resize to 224x224")
-        try:
-            img = Image.open(st.session_state.uploaded_patient_img_left)
-        except AttributeError:
-            img = st.session_state.uploaded_patient_img_left
+        if st.session_state.uploaded_patient_img_left:
+            try:
+                img = Image.open(st.session_state.uploaded_patient_img_left)
+            except AttributeError:
+                img = st.session_state.uploaded_patient_img_left
         #img = Image.open(st.session_state.uploaded_patient_img_left)
-        processed = preprocess_image(img)
-        st.session_state.processed_image = processed
+            processed = preprocess_image(img)
+            st.session_state.processed_image = processed
 
-        col1, col2 = st.columns(2)
-        with col1:
-            st.image(st.session_state.uploaded_patient_img_left, caption="Original Image", use_container_width=True)
-        with col2:
-            st.image(processed, caption="Processed Image", use_container_width=True)
-    else:
-        st.warning("Please upload an image first.")
-    if st.session_state.uploaded_patient_img_right:
-        #grayscale = st.checkbox("Convert to Grayscale")
-        #resize = st.checkbox("Resize to 224x224")
-        try:
-            img = Image.open(st.session_state.uploaded_patient_img_right)
-        except AttributeError:
-            img = st.session_state.uploaded_patient_img_right
+            col1, col2 = st.columns(2)
+            with col1:
+                st.image(st.session_state.uploaded_patient_img_left, caption="Original Image", use_container_width=True)
+            with col2:
+                st.image(processed, caption="Processed Image", use_container_width=True)
+        else:
+            st.warning("Please upload an image first.")
+        if st.session_state.uploaded_patient_img_right:
+            #grayscale = st.checkbox("Convert to Grayscale")
+            #resize = st.checkbox("Resize to 224x224")
+            try:
+                img = Image.open(st.session_state.uploaded_patient_img_right)
+            except AttributeError:
+                img = st.session_state.uploaded_patient_img_right
         #img = Image.open(st.session_state.uploaded_patient_img_right)
-        processed = preprocess_image(img)
-        st.session_state.processed_image = processed
+            processed = preprocess_image(img)
+            st.session_state.processed_image = processed
 
-        col1, col2 = st.columns(2)
-        with col1:
-            st.image(st.session_state.uploaded_patient_img_right, caption="Original Image", use_container_width=True)
-        with col2:
-            st.image(processed, caption="Processed Image", use_container_width=True)
-    else:
-        st.warning("Please upload an image first.")
+            col1, col2 = st.columns(2)
+            with col1:
+                st.image(st.session_state.uploaded_patient_img_right, caption="Original Image", use_container_width=True)
+            with col2:
+                st.image(processed, caption="Processed Image", use_container_width=True)
+        else:
+            st.warning("Please upload an image first.")
+
 
 # -------------------------------
 # Analysis
