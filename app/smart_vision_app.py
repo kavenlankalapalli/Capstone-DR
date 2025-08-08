@@ -16,6 +16,9 @@ from tensorflow.keras.models import load_model
 from help_section import render_help
 #from keras.models import load_model
 
+# hard coded credential for demo
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "password123"
 
 initialize_session()
 #import matplotlib.pyplot as plt
@@ -58,12 +61,12 @@ def load_model(model_path):
     #if not os.path.exists(model_path):
         #url = f"https://drive.google.com/uc?id={file_id}"
         #gdown.download(url, model_path, quiet=False)
-    model = tf.keras.models.load_model(model_path)
+    #model = tf.keras.models.load_model(model_path)
     #model = None  # Placeholder
     return model
 
 #model = None  # 
-model = load_model(model_path)
+#model = load_model(model_path)
 class_labels = ['No DR', 'Mild', 'Moderate', 'Severe', 'Proliferative DR']
 
 def predict_diabetic_retinopathy(processed):
@@ -183,18 +186,25 @@ if st.session_state.app_mode == "Home":
                 login_button = st.button("Login")
 
                 if login_button:
+                    username = st.session_state.login_user
+                    password = st.session_state.login_pass
+
                     if username and password:
-                        st.session_state.logged_in = True
-                        st.session_state.username = username
+                        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+                            st.session_state.logged_in = True
+                            st.session_state.username = username
 
-                        # Clear form fields
-                        del st.session_state["login_user"]
-                        del st.session_state["login_pass"]
+                            # Clear fields only after successful login
+                            del st.session_state["login_user"]
+                            del st.session_state["login_pass"]
 
-                        st.success(f"Welcome, {username}!")
-                        st.rerun()
-                    else:
-                        st.error("❌ Please enter both username and password.")
+                            st.success(f"✅ Welcome, {username}!")
+                            st.rerun()
+                        else:
+                            st.error("❌ Invalid username or password.")
+                else:
+                    st.error("❌ Please enter both username and password.")
+
 # -------------------------------
 # Upload Image
 # -------------------------------
