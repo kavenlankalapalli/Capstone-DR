@@ -44,23 +44,16 @@ if "processed_image" not in st.session_state:
 # Model Loading
 # -------------------------------
 model_path = os.path.join(os.path.dirname(__file__), "dr_model-4.keras")
-st.write("Checking model path:", model_path)
-
-if os.path.exists(model_path):
-    from keras.models import load_model
-    #model = load_model(model_path)
-    st.success("Model loaded!")
-else:
-    st.warning("Model not found. Skipping load.")
+#st.write("Checking model path:", model_path)
 
 @st.cache_resource
 
 def load_model(model_path):
     
     #model_path = '/Users/kalyanlankalapalli/documents/gcu/milestone-3/dr_model.keras'
-    file_id = "14b1NASH8S7JGaMc4z5gmo-7CXrkKqk5l"
+    #file_id = "14b1NASH8S7JGaMc4z5gmo-7CXrkKqk5l"
     # Ensure the models directory exists
-    os.makedirs("models", exist_ok=True)
+    #os.makedirs("models", exist_ok=True)
     # Download the model only if it doesn't already exist
     #if not os.path.exists(model_path):
         #url = f"https://drive.google.com/uc?id={file_id}"
@@ -70,7 +63,7 @@ def load_model(model_path):
     return model
 
 #model = None  # 
-#model = load_model(model_path)
+model = load_model(model_path)
 class_labels = ['No DR', 'Mild', 'Moderate', 'Severe', 'Proliferative DR']
 
 def predict_diabetic_retinopathy(processed):
