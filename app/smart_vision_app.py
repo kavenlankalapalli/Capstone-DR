@@ -209,7 +209,9 @@ if st.session_state.app_mode == "Home":
 # Upload Image
 # -------------------------------
 elif app_mode == "Upload Image":
-    st.header("Upload Retinal Image")
+    st.header("📤 Upload Retinal Image")
+
+    # --- Show patient info if available ---
     if all(k in st.session_state for k in ["first_name", "last_name", "gender", "age"]):
         st.subheader("👤 Patient Information")
         st.markdown(f"""
@@ -219,26 +221,28 @@ elif app_mode == "Upload Image":
         """)
     else:
         st.warning("⚠️ No patient data found. Please go to 'Patient Details' and submit the form.")
-         
-    uploaded_file_left = st.file_uploader("Choose a retinal image Left", type=["jpg", "jpeg", "png"])
-    uploaded_file_right = st.file_uploader("Choose a retinal image Right", type=["jpg", "jpeg", "png"])
-  
-    
+
+    # --- Upload controls ---
+    uploaded_file_left = st.file_uploader("Choose a retinal image - Left Eye", type=["jpg", "jpeg", "png"])
+    uploaded_file_right = st.file_uploader("Choose a retinal image - Right Eye", type=["jpg", "jpeg", "png"])
+
+    # --- Handle Left Eye Upload ---
     if uploaded_file_left:
         img_left = Image.open(uploaded_file_left)
         st.session_state.uploaded_patient_img_left = img_left
-        st.image(img_left, caption="New Uploaded Image - Left Eye", use_container_width=True)
-        st.success("Left eye image uploaded!")
-    elif "uploaded_patient_img_left" in st.session_state:
-        st.image(st.session_state.uploaded_patient_img_left, caption="Previously Uploaded Image - Left Eye", use_container_width=True)
+        st.image(img_left, caption="🆕 New Uploaded Image - Left Eye", use_container_width=True)
+        st.success("✅ Left eye image uploaded!")
+    elif st.session_state.get("uploaded_patient_img_left"):
+        st.image(st.session_state.uploaded_patient_img_left, caption="📂 Previously Uploaded Image - Left Eye", use_container_width=True)
+
+    # --- Handle Right Eye Upload ---
     if uploaded_file_right:
         img_right = Image.open(uploaded_file_right)
         st.session_state.uploaded_patient_img_right = img_right
-        st.image(img_right, caption="New Uploaded Image - Right Eye", use_container_width=True)
-        st.success("Right eye image uploaded!")
-    elif "uploaded_patient_img_right" in st.session_state:
-        st.image(st.session_state.uploaded_patient_img_right, caption="Previously Uploaded Image - Right Eye", use_container_width=True)
-    
+        st.image(img_right, caption="🆕 New Uploaded Image - Right Eye", use_container_width=True)
+        st.success("✅ Right eye image uploaded!")
+    elif st.session_state.get("uploaded_patient_img_right"):
+        st.image(st.session_state.uploaded_patient_img_right, caption="📂 Previously Uploaded Image - Right Eye", use_container_width=True)
     
 
 # -------------------------------
