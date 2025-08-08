@@ -13,6 +13,7 @@ from session_manager import clear_patient_session
 from report import generate_report
 #import gdown
 from tensorflow.keras.models import load_model
+from help_section import render_help
 #from keras.models import load_model
 
 
