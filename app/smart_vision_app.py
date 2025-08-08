@@ -44,17 +44,17 @@ if "processed_image" not in st.session_state:
 # -------------------------------
 
 if os.path.exists("report.py"):
-    model = load_model(model_path)
+   # model = load_model(model_path)
     print("report file found")
 else:
     raise FileNotFoundError(f"Model not found at: {model_path}")
 model_path = "dr_model-4.keras"
 #model_path = os.path.join("..", "model", "dr_model-4.keras")
 # Optional: check the file if it exists
-if os.path.exists(model_path):
-    model = load_model(model_path)
-else:
-    raise FileNotFoundError(f"Model not found at: {model_path}")
+#if os.path.exists(model_path):
+#    model = load_model(model_path)
+#else:
+#    raise FileNotFoundError(f"Model not found at: {model_path}")
 @st.cache_resource
 
 def load_model(model_path):
@@ -72,7 +72,7 @@ def load_model(model_path):
     return model
 
 #model = None  # 
-model = load_model(model_path)
+#model = load_model(model_path)
 class_labels = ['No DR', 'Mild', 'Moderate', 'Severe', 'Proliferative DR']
 
 def predict_diabetic_retinopathy(processed):
