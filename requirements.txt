@@ -3,7 +3,6 @@ gdown==4.7.1
 Pillow
 numpy
 opencv-python-headless
-tensorflow
 matplotlib
 tensorflow==2.19.0
 keras==3.10.0
