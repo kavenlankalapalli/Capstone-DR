@@ -293,7 +293,18 @@ elif app_mode == "Preprocessing":
 # Analysis
 # -------------------------------
 elif app_mode == "Analysis":
-    st.header("Run Model Analysis")
+    st.header("📊 Run Model Analysis")
+    
+    # --- Check if any image was uploaded ---
+    left_img_exists = st.session_state.get("uploaded_patient_img_left") is not None
+    right_img_exists = st.session_state.get("uploaded_patient_img_right") is not None
+    if not (left_img_exists or right_img_exists):
+        st.warning("⚠️ Please submit the patient form with at least one retinal image (left or right) before performing analysis.")
+        st.stop()
+    # --- Check if model is loaded ---
+    if not model:
+        st.error("❌ Model not loaded. Please load the model.")
+        st.stop()
     if st.session_state.processed_image is not None and model:
         st.image(st.session_state.processed_image, caption="Analyzing Image", use_column_width=True)
         with st.spinner('Running prediction...'):
@@ -304,8 +315,7 @@ elif app_mode == "Analysis":
     elif not model:
         st.error("Model not loaded. Please load the model.")
     else:
-        st.warning("Please preprocess an image before analysis.")
-
+        st.warning("⚠️ Please preprocess at least one image before analysis.")
 # -------------------------------
 # Report
 # -------------------------------
