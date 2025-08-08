@@ -43,7 +43,7 @@ if "processed_image" not in st.session_state:
 # -------------------------------
 # Model Loading
 # -------------------------------
-model_path = os.path.join(os.path.dirname(__file__), "dr_model-4.keras")
+model_path = os.path.join(os.path.dirname(__file__), "dr_model.h5")
 #st.write("Checking model path:", model_path)
 
 @st.cache_resource
