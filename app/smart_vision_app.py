@@ -321,6 +321,14 @@ elif app_mode == "Analysis":
 # -------------------------------
 elif app_mode == "Report":
     st.header("Download Report")
+    if (
+        "processed_image" not in st.session_state
+        or st.session_state.processed_image is None
+        or "predicted_stage" not in st.session_state
+        or "prediction_confidence" not in st.session_state
+    ):
+        st.warning("⚠️ Please complete the analysis before generating the report.")
+        st.stop()
     report_text = generate_report("123",st.session_state.get("first_name"),st.session_state.get("age"),st.session_state.get("gender"),"Mild","10%","demo")
     st.subheader("📄 DR AI Report")
     st.text(report_text)
@@ -337,6 +345,7 @@ elif app_mode == "Report":
         st.info("More report export options will be added.")
     else:
         st.warning("No image available.")
+
 
 # -------------------------------
 # Patient Details
