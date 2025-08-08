@@ -367,6 +367,8 @@ elif app_mode == "Patient Details":
     if submitted and not form_disabled:
         if not all([first_name, last_name]) or age == 0:
             st.warning("Please complete all fields.")
+        elif not uploaded_patient_img_left and not uploaded_patient_img_right:
+            st.warning("⚠️ Please upload at least one retinal image (left or right).")
         else:
             clear_patient_session()
             update_patient_info(first_name, last_name, gender, age, uploaded_patient_img_left, uploaded_patient_img_right)
